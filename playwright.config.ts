@@ -7,11 +7,11 @@ export default defineConfig({
   reporter: [['html', { outputFolder: 'reports' }]],
   use: {
     baseURL: 'https://www.saucedemo.com',
-    headless: false,
+    headless: process.env.CI === 'true' ? true : false,
     screenshot: 'only-on-failure',
     video: 'off',
     launchOptions: {
-      slowMo: 500,
+      slowMo: process.env.CI === 'true' ? 0 : 500,
     },
   },
 });
